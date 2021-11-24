@@ -1,0 +1,11 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5433,
+    "username": "noodleshop",
+    "password": "noodleshop",
+    "database": "noodleshop",
+    "synchronize": true,
+    "logging": true,
+    "entities": ["src/entities/**/*.ts", "dist/entities/**/*.js"]
+}
