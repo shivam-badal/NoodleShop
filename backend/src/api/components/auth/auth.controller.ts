@@ -1,5 +1,10 @@
 import { RegisterDTO } from "./dto/register.dto";
-// import { passport } from "passport";
-// import { LocalStrategy } from "passport-local";
+import * as userDao from "../user/user.dao";
+import { User } from "../../../entities/user.entity";
 
-export const register = async (registerDto: RegisterDTO) => {};
+export const register = async (registerDto: RegisterDTO): Promise<User> => {
+    /**
+     * TODO: Add check for existing email!
+     */
+    return userDao.createUser(registerDto);
+};
