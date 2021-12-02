@@ -13,7 +13,6 @@ router.post("/register", async (req, res) => {
         lastName: req.body.lastName,
         password: req.body.password,
     };
-    // console.log("AUTH ROUTE: ", registerDto.password);
 
     const user: User = await authController.register(registerDto);
     res.json(user);
