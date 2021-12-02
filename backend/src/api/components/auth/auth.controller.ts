@@ -4,9 +4,11 @@ import { User } from "../../../entities/user.entity";
 import { LoginDTO } from "./dto/login.dto";
 
 export const register = async (registerDTO: RegisterDTO): Promise<User> => {
-    /**
-     * TODO: Add check for existing email!
-     */
+    const user = await userDao.findByEmail(registerDTO.email);
+
+    if (user) {
+        throw new Error(`User with ${registerDTO.email} already exists`);
+    }
     return userDao.register(registerDTO);
 };
 
