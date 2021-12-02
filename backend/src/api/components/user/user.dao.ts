@@ -2,9 +2,7 @@ import { getRepository } from "typeorm";
 import { User } from "../../../entities/user.entity";
 import { RegisterDTO } from "../auth/dto/register.dto";
 import bcrypt from "bcrypt";
-import { Resolver } from "dns";
 import { LoginDTO } from "../auth/dto/login.dto";
-import { Response } from "express";
 
 export const findAll = async (): Promise<User[]> => {
     return getRepository(User).find();
