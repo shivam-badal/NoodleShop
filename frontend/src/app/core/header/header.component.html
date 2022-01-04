@@ -1,0 +1,26 @@
+<section class="container mx-auto w-full pb-10">
+  <nav class="flex justify-between items-center h-10 pt-10">
+    <figure [routerLink]="['home']" class="z-10 cursor-pointer">
+      <img
+        class="h-20 w-20"
+        src="../../../assets/images/header/cat-no-bg.png"
+        alt="Noodle icon"
+      />
+    </figure>
+    <ul class="flex gap-5">
+      <li>
+        <a [routerLink]="['shop']">Shop</a>
+      </li>
+      <li>
+        <a [routerLink]="['about']">About</a>
+      </li>
+      <li>
+        <a [routerLink]="['contact']">Contact</a>
+      </li>
+      <!-- Toggle register to login -->
+      <li>
+        <a [routerLink]="['register']">Register</a>
+      </li>
+    </ul>
+  </nav>
+</section>
