@@ -7,5 +7,9 @@
     "database": "noodleshop",
     "synchronize": true,
     "logging": true,
-    "entities": ["src/entities/**/*.ts", "dist/entities/**/*.js"]
+    "entities": ["src/entities/**/*.ts", "dist/entities/**/*.js"],
+    "migrations": ["src/migrations/**/*.ts", "dist/migrations/**/*.js"],
+    "cli": {
+        "migrationsDir": "src/migrations"
+    }
 }

@@ -13,9 +13,6 @@ export const register = async (registerDTO: RegisterDTO): Promise<User> => {
 };
 
 export const login = async (loginDTO: LoginDTO): Promise<User> => {
-    /**
-     * TODO: Make custom exceptions!
-     */
     const user = await userDao.findByEmail(loginDTO.email);
 
     if (!user) {

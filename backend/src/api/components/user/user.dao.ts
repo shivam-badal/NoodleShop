@@ -15,8 +15,7 @@ export const register = async (registerDTO: RegisterDTO): Promise<User> => {
     newUser.lastName = registerDTO.lastName;
     newUser.password = await hash(registerDTO);
 
-    const newlyCreatedUser = await getRepository(User).save(newUser);
-    return newlyCreatedUser;
+    return await getRepository(User).save(newUser);
 };
 
 export const findByEmail = async (email: string) => {

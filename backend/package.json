@@ -5,7 +5,8 @@
     "main": "src/app.ts",
     "scripts": {
         "start": "nodemon src/app.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
     },
     "author": "",
     "license": "ISC",
@@ -22,6 +23,8 @@
         "passport-local": "^1.0.0",
         "pg": "^8.7.1",
         "reflect-metadata": "^0.1.13",
+        "ts-node": "^10.4.0",
+        "ts-node-dev": "^1.1.8",
         "typeorm": "^0.2.41"
     },
     "devDependencies": {
