@@ -6,8 +6,7 @@ import jsonwebtoken from "jsonwebtoken";
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.secureCookie || '';
-    console.log(req.cookies)
-    console.log(token);
+
     if (!token) {
         return res.status(401).json("Not verified")
     }
