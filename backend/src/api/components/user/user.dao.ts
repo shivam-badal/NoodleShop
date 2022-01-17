@@ -4,6 +4,7 @@ import { RegisterDTO } from "../auth/dto/register.dto";
 import bcrypt from "bcrypt";
 import { LoginDTO } from "../auth/dto/login.dto";
 
+//TODO: Remove
 export const findAll = async (): Promise<User[]> => {
     return getRepository(User).find();
 };

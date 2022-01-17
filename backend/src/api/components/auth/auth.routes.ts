@@ -3,6 +3,7 @@ import { User } from "../../../entities/user.entity";
 import * as authController from "./auth.controller";
 import { LoginDTO } from "./dto/login.dto";
 import { RegisterDTO } from "./dto/register.dto";
+import {GetUserDTO} from "../user/dto/get-user.dto";
 
 const router: Router = Router();
 
@@ -24,7 +25,7 @@ router.post("/login", async (req, res) => {
         password: req.body.password,
     };
 
-    const user: User = await authController.login(loginDTO, res);
+    const user: GetUserDTO = await authController.login(loginDTO, res);
     res.json(user);
 });
 

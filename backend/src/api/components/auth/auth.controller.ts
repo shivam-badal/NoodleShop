@@ -6,7 +6,6 @@ import { LoginDTO } from "./dto/login.dto";
 import jsonwebtoken from "jsonwebtoken";
 import {GetUserDTO} from "../user/dto/get-user.dto";
 
-
 export const register = async (registerDTO: RegisterDTO): Promise<User> => {
     const user = await userDao.findByEmail(registerDTO.email);
 
@@ -16,29 +15,24 @@ export const register = async (registerDTO: RegisterDTO): Promise<User> => {
     return userDao.register(registerDTO);
 };
 
-export const login = async (loginDTO: LoginDTO, res: Response): Promise<User> => {
+export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserDTO> => {
     const user = await userDao.findByEmail(loginDTO.email);
-    const userDTO: GetUserDTO = new GetUserDTO()
 
     if (!user) {
         throw new Error("Login Failed");
     }
 
-    if (user) {
-        userDTO.id = user.id
-        userDTO.email = user.email
-        userDTO.firstName = user.firstName
-        userDTO.lastName = user.lastName
-        userDTO.role = user.role
-    }
-
     const isPasswdCorrect: boolean = await userDao.comparePasswords(
         loginDTO,
-        user.password
+        user?.password ?? ""
     );
 
     if (!isPasswdCorrect) {
         throw new Error("Login Failed");
+    }
+
+    if (user) {
+        delete user.password;
     }
 
     const privateKey = process.env.TOKEN_SECRET;
@@ -46,9 +40,13 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<User> =>
     if (!privateKey) {
         throw new Error("JWT Secret can't be found or is not defined")
     }
-    const token = jsonwebtoken.sign(userDTO, privateKey, {
-        expiresIn: "2 days"
-    })
+
+    const payload = {
+        user,
+        expiration: Date.now() + 600000
+    }
+
+    const token = jsonwebtoken.sign(JSON.stringify(payload), privateKey)
 
     res.cookie("secureCookie", token, {
         httpOnly: true,
