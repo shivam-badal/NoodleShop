@@ -22,6 +22,10 @@ export const findByEmail = async (email: string) => {
     return await getRepository(User).findOne({ email: email });
 };
 
+export const findById = async (id: string): Promise<User | undefined> => {
+    return await getRepository(User).findOne({id: id})
+}
+
 export const hash = (registerDto: RegisterDTO): Promise<string> => {
     return new Promise((reflect, refrain) => {
         bcrypt.genSalt(10, (err, salt) => {

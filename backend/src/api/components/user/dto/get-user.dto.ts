@@ -1,4 +1,4 @@
-export interface GetUserDTO {
+export class GetUserDTO {
     id: string;
     email: string;
     firstName: string;
