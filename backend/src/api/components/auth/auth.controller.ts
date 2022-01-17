@@ -4,7 +4,9 @@ import * as userDao from "../user/user.dao";
 import { User } from "../../../entities/user.entity";
 import { LoginDTO } from "./dto/login.dto";
 import jsonwebtoken from "jsonwebtoken";
-import {GetUserDTO} from "../user/dto/get-user.dto";
+import { GetUserDTO } from "../user/dto/get-user.dto";
+import * as tokenHelper from "../../../utils/token"
+import { Payload } from "../../../utils/token";
 
 export const register = async (registerDTO: RegisterDTO): Promise<User> => {
     const user = await userDao.findByEmail(registerDTO.email);
@@ -41,16 +43,18 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
         throw new Error("JWT Secret can't be found or is not defined")
     }
 
-    const payload = {
+    const payload: Payload = {
         user,
-        expiration: Date.now() + 600000
     }
-
-    const token = jsonwebtoken.sign(JSON.stringify(payload), privateKey)
+    const token = await tokenHelper.signToken(payload, privateKey, '1h')
+    // const token = jsonwebtoken.sign(JSON.stringify(payload), privateKey)
 
     res.cookie("secureCookie", token, {
         httpOnly: true,
+        // TODO: Put max age in .env
         maxAge: 60 * 60 * 24 * 7 * 1000,
+        // secure: true,
+        // sameSite: true
     })
 
     return user;

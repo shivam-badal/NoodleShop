@@ -13,6 +13,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 
     try {
         req.user = await jsonwebtoken.verify(token, process.env.TOKEN_SECRET!) as DecryptedToken
+        console.log(req.user)
         next();
     } catch (error) {
         next(error);
