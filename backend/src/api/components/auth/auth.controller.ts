@@ -3,7 +3,6 @@ import { RegisterDTO } from "./dto/register.dto";
 import * as userDao from "../user/user.dao";
 import { User } from "../../../entities/user.entity";
 import { LoginDTO } from "./dto/login.dto";
-import jsonwebtoken from "jsonwebtoken";
 import { GetUserDTO } from "../user/dto/get-user.dto";
 import * as tokenHelper from "../../../utils/token"
 import { Payload } from "../../../utils/token";
@@ -46,8 +45,8 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
     const payload: Payload = {
         user,
     }
+
     const token = await tokenHelper.signToken(payload, privateKey, '1h')
-    // const token = jsonwebtoken.sign(JSON.stringify(payload), privateKey)
 
     res.cookie("secureCookie", token, {
         httpOnly: true,
@@ -55,7 +54,7 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
         maxAge: 60 * 60 * 24 * 7 * 1000,
         // secure: true,
         // sameSite: true
-    })
+    });
 
     return user;
 };

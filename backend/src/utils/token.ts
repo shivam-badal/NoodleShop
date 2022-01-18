@@ -1,5 +1,6 @@
 import { User } from "../entities/user.entity";
 import jsonwebtoken, {SignOptions} from "jsonwebtoken";
+import * as middleware from "../api/middleware/isAuthenticated"
 
 export const signToken = async (payload: Payload, secretKey: string, expiresIn: string) => {
     return new Promise((resolve, reject) => {
@@ -8,7 +9,6 @@ export const signToken = async (payload: Payload, secretKey: string, expiresIn: 
         }
 
         const token = jsonwebtoken.sign(payload, secretKey, { expiresIn: 60 * 60})
-        console.log(token)
         if (!token) {
             reject({message: "dog"})
         }
