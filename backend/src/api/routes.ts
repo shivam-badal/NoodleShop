@@ -2,6 +2,7 @@ import { Router } from "express";
 import userRoutes from "./components/user/user.routes";
 import authRoutes from "./components/auth/auth.routes";
 import productRoutes from "./components/product/product.routes"
+import orderRoutes from "./components/order/order.routes"
 import { isAuthenticated } from "./middleware/isAuthenticated";
 
 const router: Router = Router();

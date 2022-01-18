@@ -18,7 +18,7 @@ export class User {
     @Column()
     lastName: string;
 
-    @OneToMany((type) => Order, (Order) => Order.user)
+    @OneToMany((type) => Order, (Order) => Order.userId)
     orders: Order[]
 
     @Column({ default: "standardUser" })

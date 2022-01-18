@@ -13,7 +13,7 @@ export const create = async(createProductDto: CreateProductDTO): Promise<Product
     product.price = createProductDto.price;
     product.image = createProductDto.image;
 
-    return getRepository(Product).save(product)
+    return await getRepository(Product).save(product)
 }
 
 export const getById = async(id: string): Promise<Product | undefined> => {
