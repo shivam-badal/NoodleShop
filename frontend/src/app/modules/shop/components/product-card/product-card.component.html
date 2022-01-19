@@ -1,17 +1,18 @@
-<div class="bg-white rounded shadow borderCard pt-5 w-90">
+<div *ngIf="product" class="bg-white rounded shadow borderCard pt-5 w-90">
   <section class="flex flex-col gap-5">
     <figure class="center w-full">
-      <img class="object-scale-down size" src="/assets/images/shop/products/shin%20ramen.jpg" alt="">
+      <img class="object-scale-down size" src="/assets/images/shop/products/{{ product.image }}" alt="">
     </figure>
   </section>
   <div class="bg-dark w-90 rounded-b p-5">
     <section class="flex flex-col">
       <section>
-        <h5 class="text-3xl text-white font-bold mb-4 mt-0">Shin Ramyun</h5>
-        <p class="text-gray-700 text-white text-sm">This is very delicious ramen </p>
+        <h5 class="text-3xl text-white font-bold mb-4 mt-0">{{ product.name}}</h5>
+        <p class="text-gray-700 text-white text-sm pb-5">{{product.description}}<br></p>
       </section>
-      <section class="pt-5">
-        <button [routerLink]="['/shop']" class="text-white pl-3 pr-3 pt-2 pb-2 bg-brand rounded brandButton w-15">Add to cart</button>
+      <section class="flex gap-5 pt-5">
+        <button [routerLink]="[product.id]" class="pl-3 pr-3 pt-2 pb-2 bg-light rounded w-15 blackText">See more!</button>
+        <button class="text-white pl-3 pr-3 pt-2 pb-2 bg-brand rounded w-15">Add to cart!</button>
       </section>
     </section>
   </div>

@@ -13,10 +13,10 @@ export class ShopComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.productService
+    this.productService
       .get()
-      .subscribe((product) => {
-
+      .subscribe((products) => {
+        this.products = products;
     })
   }
 

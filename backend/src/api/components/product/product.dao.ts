@@ -10,6 +10,7 @@ export const create = async(createProductDto: CreateProductDTO): Promise<Product
     const product = new Product()
     product.name = createProductDto.name;
     product.brand = createProductDto.brand;
+    product.description = createProductDto.description;
     product.price = createProductDto.price;
     product.image = createProductDto.image;
 

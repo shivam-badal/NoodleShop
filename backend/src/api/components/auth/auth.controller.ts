@@ -37,11 +37,17 @@ export const verify = async(req: Request, res: Response) => {
 }
 
 
-export const register = async (registerDTO: RegisterDTO): Promise<User> => {
+export const register = async (registerDTO: RegisterDTO, res: Response): Promise<User> => {
     const user = await userDao.findByEmail(registerDTO.email);
 
+    const regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&]).{8,}/
+
+    if (registerDTO.password.match(regex) === null) {
+        res.status(400).json({message: "Something went wrong with registering"})
+    }
+
     if (user) {
-        throw new Error(`User with ${registerDTO.email} already exists`);
+        res.status(400).json({message: "Login failed"})
     }
     return userDao.register(registerDTO);
 };
@@ -50,6 +56,7 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
     const user = await userDao.findByEmail(loginDTO.email);
 
     if (!user) {
+        res.status(400).json({message: "Login failed"})
         throw new Error("Login Failed");
     }
 
@@ -59,7 +66,7 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
     );
 
     if (!isPasswdCorrect) {
-        throw new Error("Login Failed");
+        res.status(400).json({message: "Login failed"})
     }
 
     if (user) {

@@ -1,0 +1,24 @@
+.size {
+  width: 300px;
+  height: 180px;
+}
+
+.blackText {
+  color: black;
+}
+
+button:disabled {
+  background-color: #464649;
+}
+
+h1, p, label, button {
+  color: white;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.invalidFeedback {
+  color: #ef4444;
+}

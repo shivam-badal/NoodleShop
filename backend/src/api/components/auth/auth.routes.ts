@@ -8,6 +8,7 @@ import {GetUserDTO} from "../user/dto/get-user.dto";
 const router: Router = Router();
 
 router.post("/register", async (req, res) => {
+
     const registerDto: RegisterDTO = {
         email: req.body.email,
         firstName: req.body.firstName,
@@ -15,8 +16,14 @@ router.post("/register", async (req, res) => {
         password: req.body.password,
     };
 
-    const user: User = await authController.register(registerDto);
-    res.json(user);
+    const user: User = await authController.register(registerDto, res);
+    res.json({
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+    });
 });
 
 router.post("/login", async (req, res) => {
@@ -29,7 +36,7 @@ router.post("/login", async (req, res) => {
     res.json(user);
 });
 
-router.post("/verify", async (req, res) => {
+router.get("/verify", async (req, res) => {
     return await authController.verify(req, res);
 });
 

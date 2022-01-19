@@ -16,9 +16,9 @@ router.get("/:id", async(req, res) =>{
     const id = req.params.id;
 
     const product: Product = await productController.getById(id);
-
+    console.log(product)
     res.json({
-        product: product
+        ...product
     });
 });
 
@@ -26,6 +26,7 @@ router.post("/create", async(req, res) => {
     const createProductDTO: CreateProductDTO = {
         name: req.body.name,
         brand: req.body.brand,
+        description: req.body.description,
         price: req.body.price,
         image: req.body.image,
     }

@@ -1,0 +1,35 @@
+<section *ngIf="product" class="container mx-auto flex flex-col items-center h-screen justify-center">
+  <section class="flex justify-between w-7/12 shadow rounded">
+    <figure>
+      <img class="w-96 h-96" src="/assets/images/shop/products/{{ product.image }}" alt="">
+    </figure>
+    <section class="bg-dark h-full w-1/2">
+      <section class="flex flex-col gap-10 p-10">
+        <section>
+          <h1>{{ product.name }}</h1>
+          <p>{{ product.description }}</p>
+        </section>
+        <section class="flex flex-col gap-5">
+          <section>
+            <p>Brand: {{ product.brand }}</p>
+            <p>Price: ${{ product.price}}</p>
+          </section>
+          <section class="mt-5 flex items-center gap-5">
+            <div class="quantity flex gap-2">
+              <p>Amount: </p>
+              <section class="flex">
+                <button (click)="decrement()" class="minus"><span>-</span></button>
+                <input name="quantity" type="text" class="input" value="{{ amount }}">
+                <button (click)="increment()" class="plus"><span>+</span></button>
+              </section>
+            </div>
+          </section>
+          <section class="flex gap-5">
+            <button class="text-white pl-3 pr-3 pt-2 pb-2 bg-brand rounded w-15">Add to cart!</button>
+            <button [routerLink]="['/products']" class="pl-3 pr-3 pt-2 pb-2 bg-light rounded w-15 blackText">Return to products</button>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>

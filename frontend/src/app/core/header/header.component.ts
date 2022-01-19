@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../http/auth.service";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  private loginInformation: Subscription = new Subscription();
+  loggedIn: boolean = false;
+  constructor(private readonly authService: AuthService) { }
 
   ngOnInit(): void {
+    this.loginInformation = this.authService.loginInformation
+      .subscribe((loginInformation) => {
+        this.loggedIn = !!loginInformation;
+        console.log(this.loggedIn);
+        console.log(loginInformation)
+      })
+  }
+
+  logOut(): void {
+    this.authService.logout().subscribe()
   }
 
 }

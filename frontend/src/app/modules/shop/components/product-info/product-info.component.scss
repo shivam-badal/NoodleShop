@@ -1,0 +1,60 @@
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.blackText {
+  color: black;
+}
+
+h1, p, button {
+  color: white;
+}
+
+h1 {
+  font-size: 32px;
+}
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.minus,
+.plus {
+  display: block;
+  width: 22px;
+  height: 23px;
+  margin: 0;
+  background: #EF4444;
+  text-decoration: none;
+  text-align: center;
+  line-height: 23px;
+}
+.minus:hover,
+.plus:hover {
+  background: #464649;
+  color: #fff;
+}
+.minus {
+  border-radius: 3px 0 0 3px;
+}
+.plus {
+  border-radius: 0 3px 3px 0;
+}
+.input {
+  width: 32px;
+  height: 23px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: #fff;
+  color: #8184a1;
+}
+.minus:link,
+.plus:link {
+  color: #8184a1;
+}
+.minus:visited,
+.plus:visited {
+  color: #fff;
+}

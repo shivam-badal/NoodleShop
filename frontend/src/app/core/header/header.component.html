@@ -4,7 +4,7 @@
       <h1 [routerLink]="['home']" >Noodleshop.</h1>
       <ul class="flex gap-5">
         <li>
-          <a [routerLink]="['shop']">Shop</a>
+          <a [routerLink]="['products']">Shop</a>
         </li>
         <li>
           <a [routerLink]="['about']">About</a>
@@ -12,9 +12,16 @@
         <li>
           <a [routerLink]="['contact']">Contact</a>
         </li>
+        <li *ngIf="loggedIn">
+          <a [routerLink]="['orders']">Orders</a>
+        </li>
         <!-- Toggle register to login -->
-        <li>
-          <a class="pt-2 pb-2 pl-3 pr-3 bg-brand rounded" [routerLink]="['register']">Register</a>
+        <li class="cursor-pointer">
+          <a *ngIf="!loggedIn" class="pt-2 pb-2 pl-3 pr-3 bg-brand rounded" [routerLink]="['login']">Login</a>
+          <a *ngIf="loggedIn" (click)="logOut()" class="pt-2 pb-2 pl-3 pr-3 bg-brand rounded">Logout</a>
+        </li>
+        <li *ngIf="!loggedIn" class="cursor-pointer">
+          <a class="pt-2 pb-2 pl-3 pr-3 bg-light rounded blackText" [routerLink]="['register']">Register</a>
         </li>
       </ul>
     </nav>

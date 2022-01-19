@@ -1,3 +1,27 @@
-<section class="container mx-auto">
-  <p>login works!</p>
+<section class="container mx-auto flex flex-col items-center h-screen justify-center">
+  <section class="flex justify-between w-7/12 shadow rounded">
+    <figure class="container mx-auto flex justify-center items-center">
+      <img class="w-80 h-80" src="/assets/images/login/undraw_two_factor_authentication_namy.svg" alt="Login image">
+    </figure>
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="bg-dark h-full w-full p-10">
+      <h1>Login</h1>
+      <section class="flex flex-col gap-1">
+        <section class="flex flex-col pt-5">
+          <label class="" for="email">Email: </label>
+          <input class="p-1 rounded" id="email" name="email" type="email" autocomplete="email" #email="ngModel" ngModel email required>
+          <div *ngIf="email.invalid" class="invalidFeedback">
+            <div *ngIf="email.errors?.email">*Email must be a valid email address</div>
+          </div>
+        </section>
+        <section class="flex flex-col pt-5">
+          <label class="" for="password">Password: </label>
+          <input class="p-1 rounded" id="password" name="password" type="password" ngModel required>
+        </section>
+        <section class="pt-4 flex flex-row-reverse gap-5">
+          <button [disabled]="!loginForm" type="submit" class="pl-3 pr-3 pt-2 pb-2 bg-brand rounded w-15">Login</button>
+          <button [routerLink]="['/register']" class="pl-3 pr-3 pt-2 pb-2 bg-light rounded w-15 blackText">Register</button>
+        </section>
+      </section>
+    </form>
+  </section>
 </section>

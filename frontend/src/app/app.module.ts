@@ -6,7 +6,7 @@ import { CoreModule } from './core/core.module';
 import { ModulesModule } from './modules/modules.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { ApiInterceptor } from "./core/http/api.interceptor";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     AppRoutingModule,
     ModulesModule,
     CoreModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
   ],
   providers: [
     {
