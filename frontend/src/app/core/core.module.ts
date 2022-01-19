@@ -4,10 +4,11 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [AuthenticationComponent, FooterComponent, HeaderComponent],
-  imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, FontAwesomeModule],
   exports: [HeaderComponent, FooterComponent, AuthenticationComponent],
 })
 export class CoreModule {}

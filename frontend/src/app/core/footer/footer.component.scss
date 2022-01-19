@@ -1,0 +1,21 @@
+* {
+  font-family: 'Inconsolata', monospace;
+}
+
+h1 {
+  font-size: 32px;
+  color: white;
+}
+
+fa-icon {
+  color: white;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: white;
+  background-image: linear-gradient(to right, black, #ccc, black);
+  width: 1300px;
+  align-self: center;
+}

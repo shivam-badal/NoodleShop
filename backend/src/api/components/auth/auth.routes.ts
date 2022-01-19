@@ -1,4 +1,4 @@
-import { Router } from "express";
+import {Response, Router} from "express";
 import { User } from "../../../entities/user.entity";
 import * as authController from "./auth.controller";
 import { LoginDTO } from "./dto/login.dto";
@@ -28,5 +28,13 @@ router.post("/login", async (req, res) => {
     const user: GetUserDTO = await authController.login(loginDTO, res);
     res.json(user);
 });
+
+router.post("/verify", async (req, res) => {
+    return await authController.verify(req, res);
+});
+
+router.delete('/logout', async(req,res) => {
+    return await authController.logout(res);
+})
 
 export default router;

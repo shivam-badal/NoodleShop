@@ -7,7 +7,7 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     const token = req.cookies.secureCookie || '';
 
     if (!token) {
-        return res.status(401).json("Not verified")
+        return res.status(401).json({message: "Not verified"})
     }
 
     try {
@@ -19,6 +19,6 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     }
 }
 
-interface DecryptedToken {
+export interface DecryptedToken {
     user: User;
 }

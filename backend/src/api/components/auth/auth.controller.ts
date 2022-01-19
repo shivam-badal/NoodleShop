@@ -1,4 +1,4 @@
-import {Response} from "express";
+import {Request, Response} from "express";
 import { RegisterDTO } from "./dto/register.dto";
 import * as userDao from "../user/user.dao";
 import { User } from "../../../entities/user.entity";
@@ -6,6 +6,36 @@ import { LoginDTO } from "./dto/login.dto";
 import { GetUserDTO } from "../user/dto/get-user.dto";
 import * as tokenHelper from "../../../utils/token"
 import { Payload } from "../../../utils/token";
+import jsonwebtoken from "jsonwebtoken";
+import { DecryptedToken } from "../../middleware/isAuthenticated";
+
+export const verify = async(req: Request, res: Response) => {
+    const token = req.cookies.secureCookie || '';
+
+    if (!token) {
+        return res.status(401).json({loggedIn: false})
+    }
+
+    try {
+        const decryptedToken = await jsonwebtoken.verify(token, process.env.TOKEN_SECRET!) as DecryptedToken
+        console.log(decryptedToken)
+
+        return res.status(200).json({loggedIn: true, user: {
+                id: decryptedToken.user.id,
+                email: decryptedToken.user.email,
+                firstName: decryptedToken.user.firstName,
+                lastName: decryptedToken.user.lastName,
+                role: decryptedToken.user.role,
+            }
+        });
+    } catch (e) {
+        if (req.cookies) {
+            await logout(res);
+        }
+        return res.status(401).json({loggedIn: false, error: e})
+    }
+}
+
 
 export const register = async (registerDTO: RegisterDTO): Promise<User> => {
     const user = await userDao.findByEmail(registerDTO.email);
@@ -58,3 +88,8 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
 
     return user;
 };
+
+export const logout = async (res: any) => {
+    res.clearCookie("secureCookie");
+    res.status(200).json({message: "Logged out successfully"})
+}

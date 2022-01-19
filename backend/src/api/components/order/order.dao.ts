@@ -6,7 +6,7 @@ import {OrderedProduct} from "../../../entities/ordered-product.entity";
 import {Product} from "../../../entities/product.entity";
 
 export const get = async(): Promise<Order[]> => {
-    return getRepository(Order).find()
+    return getRepository(Order).find({relations: ["orderedProducts"]})
 }
 
 export const create = async (userId: string, createOrderDTO: CreateOrderDTO): Promise<Order> => {
@@ -23,11 +23,10 @@ export const create = async (userId: string, createOrderDTO: CreateOrderDTO): Pr
         const product: Product | undefined = await getRepository(Product).findOne({id: productDto.productId});
         if (!product) throw new Error("Product not found")
 
-        console.log(productDto)
         const orderedProduct = new OrderedProduct()
         orderedProduct.amount = productDto.amount
         orderedProduct.product = product
-        orderedProducts.push(orderedProduct)
+        orderedProducts.push(await getRepository(OrderedProduct).save(orderedProduct))
     }
     const order: Order = new Order();
     order.userId = userId;

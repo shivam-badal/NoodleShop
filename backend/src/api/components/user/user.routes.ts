@@ -5,7 +5,7 @@ import {isAuthenticated} from "../../middleware/isAuthenticated";
 
 const router: Router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/",isAuthenticated, async (req, res) => {
     const users = await userController.findAll();
 
     res.json(users);

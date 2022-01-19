@@ -1,0 +1,23 @@
+* {
+  font-family: 'Inconsolata', monospace;
+}
+
+.borderCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.size {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+h5, p, button {
+  color: white;
+}

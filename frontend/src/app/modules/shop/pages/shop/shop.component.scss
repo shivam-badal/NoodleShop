@@ -1,0 +1,13 @@
+h1 {
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.gridContainer {
+  @apply container;
+  @apply mx-auto grid;
+  display:  grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

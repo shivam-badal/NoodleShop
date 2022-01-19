@@ -1,0 +1,28 @@
+* {
+  font-family: 'Inconsolata', monospace;
+}
+
+h1 {
+  font-family: 'Inconsolata', monospace;
+  font-weight: bold;
+  font-size: 32px;
+  color: white;
+  cursor: pointer;
+}
+
+p {
+  font-family: 'Inconsolata', monospace;
+  color: white;
+}
+
+.brandButton {
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+.offButton {
+  border: 1px solid #A2A2A4;
+  background: transparent;
+  color: white;
+}
