@@ -6,14 +6,11 @@
         <li>
           <a [routerLink]="['products']">Shop</a>
         </li>
-        <li>
-          <a [routerLink]="['about']">About</a>
-        </li>
-        <li>
-          <a [routerLink]="['contact']">Contact</a>
-        </li>
         <li *ngIf="loggedIn">
           <a [routerLink]="['orders']">Orders</a>
+        </li>
+        <li *ngIf="isAdmin">
+          <a [routerLink]="['dashboard']">Dashboard</a>
         </li>
         <!-- Toggle register to login -->
         <li class="cursor-pointer">

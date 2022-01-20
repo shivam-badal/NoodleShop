@@ -1,4 +1,11 @@
 <section class="hookPageContainerheight bg-lightDark">
     <app-hook-page></app-hook-page>
+
+    <section class="container mx-auto mt-10">
+      <h1>Featured products: </h1>
+      <section class="gridContainer mt-10 pb-10">
+        <app-product-card *ngFor="let product of products.slice(0, 4)" [product]="product"></app-product-card>
+      </section>
+    </section>
 </section>
 

@@ -8,5 +8,8 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
 @NgModule({
   declarations: [ShopComponent, ProductCardComponent, ProductInfoComponent],
   imports: [CommonModule, ShopRoutingModule],
+  exports: [
+    ProductCardComponent
+  ]
 })
 export class ShopModule {}

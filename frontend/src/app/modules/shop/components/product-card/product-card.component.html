@@ -11,7 +11,7 @@
         <p class="text-gray-700 text-white text-sm pb-5">{{product.description}}<br></p>
       </section>
       <section class="flex gap-5 pt-5">
-        <button [routerLink]="[product.id]" class="pl-3 pr-3 pt-2 pb-2 bg-light rounded w-15 blackText">See more!</button>
+        <button [routerLink]="['/products/' + product.id]" class="pl-3 pr-3 pt-2 pb-2 bg-light rounded w-15 blackText">See more!</button>
         <button class="text-white pl-3 pr-3 pt-2 pb-2 bg-brand rounded w-15">Add to cart!</button>
       </section>
     </section>

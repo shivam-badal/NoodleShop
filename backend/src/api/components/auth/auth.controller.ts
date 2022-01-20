@@ -7,7 +7,7 @@ import { GetUserDTO } from "../user/dto/get-user.dto";
 import * as tokenHelper from "../../../utils/token"
 import { Payload } from "../../../utils/token";
 import jsonwebtoken from "jsonwebtoken";
-import { DecryptedToken } from "../../middleware/isAuthenticated";
+import {DecryptedTokenDTO} from "./dto/decryptedToken.dto";
 
 export const verify = async(req: Request, res: Response) => {
     const token = req.cookies.secureCookie || '';
@@ -17,22 +17,21 @@ export const verify = async(req: Request, res: Response) => {
     }
 
     try {
-        const decryptedToken = await jsonwebtoken.verify(token, process.env.TOKEN_SECRET!) as DecryptedToken
-        console.log(decryptedToken)
+        const decryptedToken = await jsonwebtoken.verify(token, process.env.TOKEN_SECRET!) as DecryptedTokenDTO
 
         return res.status(200).json({loggedIn: true, user: {
                 id: decryptedToken.user.id,
                 email: decryptedToken.user.email,
                 firstName: decryptedToken.user.firstName,
                 lastName: decryptedToken.user.lastName,
-                role: decryptedToken.user.role,
+                admin: decryptedToken.user.admin,
             }
         });
     } catch (e) {
         if (req.cookies) {
             await logout(res);
         }
-        return res.status(401).json({loggedIn: false, error: e})
+        return res.status(401).json({loggedIn: false})
     }
 }
 
@@ -52,12 +51,12 @@ export const register = async (registerDTO: RegisterDTO, res: Response): Promise
     return userDao.register(registerDTO);
 };
 
-export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserDTO> => {
+export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserDTO | undefined> => {
     const user = await userDao.findByEmail(loginDTO.email);
 
     if (!user) {
-        res.status(400).json({message: "Login failed"})
-        throw new Error("Login Failed");
+        res.status(401).json({message: "Login failed"})
+        return
     }
 
     const isPasswdCorrect: boolean = await userDao.comparePasswords(
@@ -66,7 +65,8 @@ export const login = async (loginDTO: LoginDTO, res: Response): Promise<GetUserD
     );
 
     if (!isPasswdCorrect) {
-        res.status(400).json({message: "Login failed"})
+        res.status(401).json({message: "Login failed"})
+        return
     }
 
     if (user) {

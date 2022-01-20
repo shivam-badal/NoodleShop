@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        role: user.role,
+        admin: user.admin,
     });
 });
 
@@ -32,8 +32,8 @@ router.post("/login", async (req, res) => {
         password: req.body.password,
     };
 
-    const user: GetUserDTO = await authController.login(loginDTO, res);
-    res.json(user);
+    const user: GetUserDTO | undefined = await authController.login(loginDTO, res);
+    user ? res.json(user) : res.status(401).json({message: "Login failed"});
 });
 
 router.get("/verify", async (req, res) => {

@@ -10,14 +10,16 @@ import {Observable, Subscription} from "rxjs";
 export class HeaderComponent implements OnInit {
   private loginInformation: Subscription = new Subscription();
   loggedIn: boolean = false;
+  isAdmin: boolean = false;
   constructor(private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     this.loginInformation = this.authService.loginInformation
       .subscribe((loginInformation) => {
         this.loggedIn = !!loginInformation;
-        console.log(this.loggedIn);
-        console.log(loginInformation)
+        this.isAdmin = !!loginInformation?.admin
+        console.log("ADMIN", this.isAdmin)
+
       })
   }
 

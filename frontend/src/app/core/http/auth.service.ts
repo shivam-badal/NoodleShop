@@ -36,6 +36,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    console.log('Login Value: ', !!this.loginInformation.getValue())
     return !!this.loginInformation.getValue()
   }
 

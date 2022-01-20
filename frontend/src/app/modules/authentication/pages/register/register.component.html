@@ -9,13 +9,13 @@
         <section class="flex flex-col pt-5">
           <label class="" for="email">Email: </label>
           <input class="p-1 rounded" id="email" name="email" type="email" autocomplete="email" #email="ngModel" ngModel email required>
-          <div *ngIf="email.touched && email.invalid" class="invalidFeedback">
-            <div *ngIf="email.errors?.email">*Email must be a valid email address</div>
+          <div *ngIf="email.touched && email.invalid" class="pt-2 invalidFeedback">
+            <p *ngIf="email.errors?.email">*Email must be a valid email address</p>
           </div>
         </section>
         <section class="flex flex-col pt-5">
           <label class="" for="firstName">First name: </label>
-          <input class="p-1 rounded" id="firstName" name="firstName" type="text" ngModel required>
+          <input class="p-1 rounded" id="firstName" name="firstName" type="text" #firstName="ngModel" ngModel required>
         </section>
         <section class="flex flex-col pt-5">
           <label class="" for="firstName">Last name: </label>

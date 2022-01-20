@@ -3,9 +3,10 @@ import { User } from "../../../entities/user.entity";
 import { RegisterDTO } from "../auth/dto/register.dto";
 import bcrypt from "bcrypt";
 import { LoginDTO } from "../auth/dto/login.dto";
+import {GetUserDTO} from "./dto/get-user.dto";
 
 //TODO: Remove
-export const findAll = async (): Promise<User[]> => {
+export const findAll = async (): Promise<GetUserDTO[]> => {
     return getRepository(User).find();
 };
 

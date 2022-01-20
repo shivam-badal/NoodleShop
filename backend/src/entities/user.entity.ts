@@ -21,6 +21,6 @@ export class User {
     @OneToMany((type) => Order, (Order) => Order.userId)
     orders: Order[]
 
-    @Column({ default: "standardUser" })
-    role: string;
+    @Column({ default: false })
+    admin: boolean;
 }

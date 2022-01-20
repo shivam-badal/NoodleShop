@@ -9,6 +9,9 @@ module.exports = {
       light: "#FFFFFF",
       lightDark: "#464649"
     },
+    minHeight: {
+      '3/4': '75%',
+    }
   },
   variants: {
     extend: {},
